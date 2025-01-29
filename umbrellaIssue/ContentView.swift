@@ -11,32 +11,24 @@ import SwiftData
 
 
 struct ContentView: View {
-
-    let weatherManager = WeatherManager()
-    
-    @State var currentWeather: currentWeather? = nil
     
     var body: some View {
-        VStack {
+        ScrollView {
+            currentWeatherView()
+
+            TodayWeatherView()
             
-            if let currentWeather = currentWeather {
-                Text("\(currentWeather.temperature)")
-                Text("\(currentWeather.condition)")
-                Text("\(currentWeather.humnidity)")
-                Text("\(currentWeather.precipitation)")
-                
-            } else {
-                Text("날씨 정보 불러오는 중...")
-            }
+            WeakWeatherView()
             
-            
+            DustView()
+
             
         }
-        .onAppear {
-            Task {
-                currentWeather = await weatherManager.getCurrentWeather(lat: 35.1379, lon: 129.0556)
-            }
-        }
+        .frame(maxHeight: .infinity)
+        .contentMargins([.top, .bottom], 80)
+        .background(Gradient(colors: [Color(hexString: "6283F1"), Color(hexString: "D7D7D7")]))
+        .ignoresSafeArea()
+
     }
 
    
