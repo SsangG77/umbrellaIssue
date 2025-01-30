@@ -19,6 +19,10 @@ struct hourWeather: Identifiable, Codable {
 
 
 struct TodayWeatherView: View {
+    
+    let weatherManager = WeatherManager()
+    @State var hourWeathers:[HourWeather] = []
+    
     var body: some View {
             HStack {
                 ScrollView(.horizontal, showsIndicators: true) {
@@ -64,6 +68,12 @@ struct TodayWeatherView: View {
                 )
             .padding()
             .frame(height: 270)
+            .onAppear {
+                Task {
+                    
+                    hourWeathers = await weatherManager.getTodayWeather(lat: 35.1379222, lon: 129.05562775)
+                }
+            }
     }
 }
 

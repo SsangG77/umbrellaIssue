@@ -19,15 +19,17 @@ struct currentWeatherView: View {
             let imageSize = geo.size.width * 0.25
             
             
-//            if let currentWeather = currentWeather {
-//                Text("\(currentWeather.temperature)")
-//                Text("\(currentWeather.condition)")
-//                Text("\(currentWeather.humnidity)")
-//                Text("\(currentWeather.precipitation)")
-//
-//            } else {
-//                Text("날씨 정보 불러오는 중...")
-//            }
+            if let currentWeather = currentWeather {
+                Text("\(currentWeather.temperature)")
+                Text("\(currentWeather.condition)")
+                Text("\(currentWeather.humnidity)")
+                Text("\(currentWeather.precipitation)")
+                
+                
+
+            } else {
+                Text("날씨 정보 불러오는 중...")
+            }
             
             VStack(alignment: .center) {
                 HStack {
@@ -90,7 +92,7 @@ struct currentWeatherView: View {
     }
 }
 
-//#Preview {
-//    currentWeatherView()
-//        .background(Color(hexString: "6283F1"))
-//}
+#Preview {
+    currentWeatherView()
+        .background(Color(hexString: "6283F1"))
+}

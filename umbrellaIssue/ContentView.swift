@@ -12,6 +12,10 @@ import SwiftData
 
 struct ContentView: View {
     
+    
+    
+    
+    
     var body: some View {
         ScrollView {
             currentWeatherView()
@@ -28,6 +32,7 @@ struct ContentView: View {
         .contentMargins([.top, .bottom], 80)
         .background(Gradient(colors: [Color(hexString: "6283F1"), Color(hexString: "D7D7D7")]))
         .ignoresSafeArea()
+        
 
     }
 
