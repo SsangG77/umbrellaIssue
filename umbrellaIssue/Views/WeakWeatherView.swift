@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct WeakWeatherView: View {
+    
+    let weatherManager = WeatherManager()
+    @Binding var currentWeather: currentWeather
+    
+    
     var body: some View {
         GeometryReader { geo in
             VStack {
@@ -53,8 +58,22 @@ struct WeakWeatherView: View {
             .cornerRadius(20)
             .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color(hexString: "0038BB"), lineWidth: 3)
+                        .stroke(
+                            Color(hexString:
+                                currentWeather.weatherType == .rain ?
+                                  currentWeather.isDaylight ? "0038BB" : "7087BD"
+                           :
+                                currentWeather.weatherType == .snow ?
+                                  currentWeather.isDaylight ? "2E435C" : "98BCE8"
+                           :
+                            currentWeather.isDaylight ? "5D0000" : "BD7070"
+                          ), lineWidth: 3)
                 )
+            .onAppear {
+                Task {
+                    await weatherManager.getWeakWeather(lat: 35.1379222, lon: 129.05562775)
+                }
+            }
         }
         .padding(.horizontal)
         .frame(height: 67 * 7)
