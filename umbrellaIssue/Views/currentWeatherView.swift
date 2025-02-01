@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+// 메인 앱과 위젯 둘 다에서
+import SharedWeatherKit
 
 struct currentWeatherView: View {
     
     
     
     @Binding var currentWeather: currentWeather
+    @Binding var locationName: String
     
     var body: some View {
         GeometryReader { geo in
@@ -33,7 +36,7 @@ struct currentWeatherView: View {
                             .padding(.trailing, 25)
                             
                         VStack {
-                            Text("부산광역시")
+                            Text(locationName)
                                 .foregroundColor(Color(hexString: 
                                                         currentWeather.weatherType == .rain ? 
                                                        "0038BB"

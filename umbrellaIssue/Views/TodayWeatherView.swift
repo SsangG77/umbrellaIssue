@@ -7,22 +7,18 @@
 
 import SwiftUI
 
+// 메인 앱과 위젯 둘 다에서
+import SharedWeatherKit
 
-//struct hourWeather: Identifiable, Codable {
-//    let id = UUID()
-//    var time = Date()
-//    var condition: String
-//    var precipitation: Int
-//    var temp: Int
-//    
-//}
+
 
 
 struct TodayWeatherView: View {
     
-    let weatherManager = WeatherManager()
-    @State var hourWeathers:[HourWeather] = []
+    @StateObject private var locationManager = LocationManager()
+       let weatherManager = WeatherManager()
     
+    @State var hourWeathers:[HourWeather] = []
     @Binding var currentWeather: currentWeather
     
     var body: some View {
@@ -97,10 +93,21 @@ struct TodayWeatherView: View {
             .padding()
             .frame(height: 270)
             .onAppear {
-                Task {
-                    hourWeathers = await weatherManager.getTodayWeather(lat: 35.1379222, lon: 129.05562775)
-                }
-            }
+                        locationManager.requestLocation()
+                    }
+                    .onChange(of: locationManager.location) { newLocation in
+                        guard let location = newLocation else { return }
+                        Task {
+                            hourWeathers = await weatherManager.getTodayWeather(location: location)
+                        }
+                    }
+//            .onAppear {
+//                Task {
+//                    if let hour = await weatherManager.getTodayWeather() {
+//                        hourWeathers = hour
+//                    }
+//                }
+//            }
     }
 }
 
@@ -177,7 +184,6 @@ struct SingleTodayWeatherView: View {
             
         }
         .frame(width: 70, height: 170)
-//        .border(width: 1, edges: [.trailing, .leading], color: Color(hexString: "0038BB", opacity: 0.4))
         .padding()
     }
 }
