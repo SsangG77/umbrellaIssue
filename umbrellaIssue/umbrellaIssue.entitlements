@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.sangjin.umbrellaIssueWidget</string>
+		<string>group.com.sangjin.umbrellaWidget</string>
 	</array>
 </dict>
 </plist>

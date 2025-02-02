@@ -74,21 +74,14 @@ struct ContentView: View {
         ]))
         .ignoresSafeArea()
         .onAppear {
-                    locationManager.requestLocation()
-                }
-                .onChange(of: locationManager.location) { newLocation in
-                    guard let location = newLocation else { return }
-                    Task {
-                        currentWeather = await weatherManager.getCurrentWeather(location: location)
-                    }
-                }
-//        .onAppear {
-//            Task {
-//                if let current = await weatherManager.getCurrentWeather() {
-//                    currentWeather = current
-//                }
-//            }
-//        }
+            locationManager.requestLocation()
+        }
+        .onChange(of: locationManager.location) { newLocation in
+            guard let location = newLocation else { return }
+            Task {
+                currentWeather = await weatherManager.getCurrentWeather(location: location)
+            }
+        }
     }
 }
 

@@ -9,7 +9,6 @@
 import Foundation
 import WeatherKit
 import CoreLocation
-import WidgetKit
 
 
 
@@ -69,7 +68,7 @@ public struct WeekWeather: Identifiable, Codable {
 
 public class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
-    
+    public let defaults = UserDefaults(suiteName: "group.com.sangjin.umbrellaWidget") // 앱 그룹 설정
     
     private var locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
@@ -85,23 +84,46 @@ public class LocationManager: NSObject, ObservableObject, CLLocationManagerDeleg
         locationManager.requestWhenInUseAuthorization()
     }
     
+    
+    
+
+//    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        authorizationStatus = status
+//        if status == .authorizedWhenInUse || status == .authorizedAlways {
+//            manager.requestLocation()
+//        }
+//    }
+
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            authorizationStatus = status
+            if status == .authorizedWhenInUse || status == .authorizedAlways {
+                manager.requestLocation()
+                defaults?.set(true, forKey: "LocationPermissionGranted") // 위치 권한이 할당되었음을 저장
+            } else {
+                defaults?.set(false, forKey: "LocationPermissionGranted") // 위치 권한이 할당되지 않았음을 저장
+            }
+        }
+    
+    
     public func requestLocation() {
         locationManager.requestLocation()
     }
-
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        authorizationStatus = status
-        if status == .authorizedWhenInUse || status == .authorizedAlways {
-            manager.requestLocation()
-        }
-    }
-
+    
+    
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let newLocation = locations.first {
                     location = newLocation
                     fetchLocality(from: newLocation) // 🆕 위치 정보 가져올 때 지역명도 가져오기
                 }
     }
+       
+    
+    
+    
+    
+    
+ 
+   
 
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("위치 업데이트 실패: \(error.localizedDescription)")
@@ -130,26 +152,23 @@ public class LocationManager: NSObject, ObservableObject, CLLocationManagerDeleg
 
 public class WeatherManager {
     
-    public init() { }
+    public init() {
+            // 초기화 코드가 있다면 여기에
+        }
     
     let weatherService = WeatherService()
     
-    let defaults = UserDefaults(suiteName: "group.com.sangjin.umbrellaIssue") // 앱 그룹 설정
-    
-    
+    public let defaults = UserDefaults(suiteName: "group.com.sangjin.umbrellaWidget") // 앱 그룹 설정
+
 
     /// 🌟 현재 날씨 가져오기
     public func getCurrentWeather(location: CLLocation) async -> currentWeather? {
         do {
-            print("🌤 [날씨] 날씨 가져오기 시도 중... (\(location.coordinate.latitude), \(location.coordinate.longitude))")
-            
             let weather = try await weatherService.weather(for: location)
+            
             let weatherType = getWeatherType(condition: weather.currentWeather.condition)
-            
-            // ✅ 최신 날씨 타입을 UserDefaults에 저장
-            defaults?.set(weatherType.rawValue, forKey: "lastWeatherType")
-            defaults?.synchronize()
-            
+            print("현재 날씨 가져오기 \(weatherType)")
+           // saveWeatherType(weatherType: weatherType) // 날씨 타입 저장
             
             return currentWeather(
                 temperature: Int(weather.currentWeather.temperature.value),
@@ -237,7 +256,4 @@ public class WeatherManager {
         return weekdays[Calendar.current.component(.weekday, from: d) - 1]
     }
 }
-
-
-
 

@@ -2,13 +2,13 @@
 //  umbrellaIssueWidgetBundle.swift
 //  umbrellaIssueWidget
 //
-//  Created by 차상진 on 2/1/25.
+//  Created by 차상진 on 2/2/25.
 //
 
 import WidgetKit
 import SwiftUI
 
-//@main
+@main
 struct umbrellaIssueWidgetBundle: WidgetBundle {
     var body: some Widget {
         umbrellaIssueWidget()

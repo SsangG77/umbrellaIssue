@@ -1,24 +1,15 @@
-//
-//  umbrellaIssueApp.swift
-//  umbrellaIssue
-//
-//  Created by 차상진 on 1/28/25.
-//
-
 import SwiftUI
-import SwiftData
-import CoreLocation
-
-
+import UIKit
+import BackgroundTasks
+import SharedWeatherKit
 
 @main
 struct umbrellaIssueApp: App {
-
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
 }
-
-
