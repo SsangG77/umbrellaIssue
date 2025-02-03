@@ -23,16 +23,30 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "91CF90BF2D4A4C0D0047A7A8"
                BuildableName = "widgetExtension.appex"
                BlueprintName = "widgetExtension"
+               ReferencedContainer = "container:umbrellaIssue.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "914ECB462D4EA731005036E3"
+               BuildableName = "umbrellaIssueWidgetExtension.appex"
+               BlueprintName = "umbrellaIssueWidgetExtension"
                ReferencedContainer = "container:umbrellaIssue.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

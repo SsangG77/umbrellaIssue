@@ -165,18 +165,23 @@ struct SingleTodayWeatherView: View {
                 
                 
             
-            
-            Text(h.precipitation + "mm")
-                .foregroundColor(Color(hexString:
-                                        weatherType == .rain ?
-                                       "0038BB"
-                                       :
-                                        weatherType == .snow ?
-                                       "2E435C"
-                                       :
-                                        "5D0000"
-                                      ))
-                .padding(.bottom, 15)
+            if h.precipitation == "0.0" {
+                Spacer()
+                    .frame(height: 48)
+            } else {
+                
+                Text(h.precipitation + "mm")
+                    .foregroundColor(Color(hexString:
+                                            weatherType == .rain ?
+                                           "0038BB"
+                                           :
+                                            weatherType == .snow ?
+                                           "2E435C"
+                                           :
+                                            "5D0000"
+                                          ))
+                    .padding(.bottom, 15)
+            }
             
             Text("\(String(h.temperature))℃")
                 .foregroundColor(.white)
@@ -189,10 +194,7 @@ struct SingleTodayWeatherView: View {
 }
 
 
-
+//
 //#Preview {
-//    TodayWeatherView()
-//        .padding(.top, 100)
-//        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-//        .background(Color(hexString: "6283F1", opacity: 0.8))
+//    ContentView()
 //}

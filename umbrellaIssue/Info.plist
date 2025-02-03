@@ -13,7 +13,7 @@
         <string>location</string>
 	</array>
     <!-- 추가 필요한 내용 -->
-        <key>UIApplicationExitsOnSuspend</key>
-        <false/>
+<!--        <key>UIApplicationExitsOnSuspend</key>-->
+<!--        <false/>-->
 </dict>
 </plist>

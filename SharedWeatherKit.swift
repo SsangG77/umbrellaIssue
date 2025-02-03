@@ -168,6 +168,7 @@ public class WeatherManager {
             
             let weatherType = getWeatherType(condition: weather.currentWeather.condition)
             print("현재 날씨 가져오기 \(weatherType)")
+            print("낮 밤 \(weather.currentWeather.isDaylight)") 
            // saveWeatherType(weatherType: weatherType) // 날씨 타입 저장
             
             return currentWeather(
@@ -183,6 +184,46 @@ public class WeatherManager {
             return nil
         }
     }
+    
+    public func needUmbrella(location: CLLocation) async -> WeatherType? {
+        
+        do {
+            
+            let weather = try await weatherService.weather(for: location)
+            
+            let isRaining = weather.hourlyForecast.forecast.contains { hour in
+                hour.date >= Date() && hour.date <= Date().addingTimeInterval(3600 * 8) &&
+                (hour.condition == .rain
+                 || hour.condition == .drizzle
+                 || hour.condition == .thunderstorms
+                 || hour.condition == .heavyRain
+                 || hour.condition == .isolatedThunderstorms
+                 || hour.condition == .sunShowers
+                 || hour.condition == .scatteredThunderstorms
+                )
+            }
+            
+            let isSnowing = weather.hourlyForecast.forecast.contains { hour in
+                hour.date >= Date() && hour.date <= Date().addingTimeInterval(3600 * 8) &&
+                (hour.condition == .flurries
+                 || hour.condition == .snow
+                 || hour.condition == .sleet
+                 || hour.condition == .sunFlurries
+                 || hour.condition == .wintryMix
+                 || hour.condition == .blizzard
+                 || hour.condition == .heavySnow
+                )
+            }
+            
+            return isRaining ? .rain : isSnowing ? .snow : .sunny
+                
+            } catch {
+                print("needUmbrella Error: \(error)")
+                return nil
+            }
+    }
+    
+    
 
     /// 🌟 시간별 날씨 가져오기
     public func getTodayWeather(location: CLLocation) async -> [HourWeather] {

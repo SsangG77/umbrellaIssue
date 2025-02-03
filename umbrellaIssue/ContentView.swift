@@ -54,22 +54,19 @@ struct ContentView: View {
                   ?
                   "6283F1"
                   :
-                    currentWeather?.weatherType == .snow
+                    currentWeather?.weatherType == .snow || currentWeather?.weatherType == .cloud
                   ?
                   "446389"
                   :
                   "F16262"
                  ),
-            Color(hexString:
-                    ((currentWeather?.isDaylight) != nil) ?
-                    currentWeather?.weatherType == .rain
-                  ?
-                  "01003A"
+            Color(hexString: currentWeather?.isDaylight == true ? "D7D7D7"
                   :
-                    currentWeather?.weatherType == .snow || currentWeather?.weatherType == .sunny ? "000000" : "000000"
+                    currentWeather?.weatherType == .rain ? "01003A"
                   :
-                  "D7D7D7"
-                  
+                    currentWeather?.weatherType == .cloud || currentWeather?.weatherType == .snow ? "000000"
+                  :
+                    "171212"
                  )
         ]))
         .ignoresSafeArea()

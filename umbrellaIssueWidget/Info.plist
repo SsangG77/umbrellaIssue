@@ -10,10 +10,10 @@
     <string>날씨 정보를 가져오기 위해 위치 정보가 필요합니다.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>위젯에서 날씨 정보를 업데이트하기 위해 위치 정보가 필요합니다.</string>
-    <key>UIBackgroundModes</key>
-    <array>
-        <string>location</string>
-    </array>
+<!--    <key>UIBackgroundModes</key>-->
+<!--    <array>-->
+<!--        <string>location</string>-->
+<!--    </array>-->
     <key>NSExtension</key>
     <dict>
         <key>NSExtensionPointIdentifier</key>

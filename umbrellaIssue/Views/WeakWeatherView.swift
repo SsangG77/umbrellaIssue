@@ -119,8 +119,9 @@ struct SingleWeakWeatherView: View {
                 
                 Text("\(w.weak)")
                     .foregroundColor(w.weak == "토" ? Color(hexString: "5572C9") : w.weak == "일" ? Color(hexString: "DD6565") : .white)
-                    .font(.system(size: 30, weight: .bold))
+                    .font(.system(size: 25, weight: .bold))
             }
+            .frame(width: 35)
             .padding(.trailing, 10)
             
            

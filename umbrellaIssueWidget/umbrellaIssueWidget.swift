@@ -47,23 +47,29 @@ struct WeatherWidgetEntryView: View {
     var entry: WeatherProvider.Entry
 
     var body: some View {
-        VStack {
-            Text("🌦️ 현재 날씨")
-            Text(entry.weatherType.capitalized)
-                .font(.largeTitle)
-        }
-        .padding()
-        .background(
-            Group {
-                if #available(iOS 17.0, *) {
-                    Color.clear.containerBackground(for: .widget) {
-                        Color.clear  // ✅ iOS 17용 배경 처리
-                    }
-                } else {
-                    Color.white  // ✅ iOS 16 이하에서는 단순한 배경 적용
-                }
+      
+            VStack {
+                Image(entry.weatherType.capitalized == "rain" ? "umbrella" : entry.weatherType.capitalized == "cloud" ? "cloud" : entry.weatherType.capitalized == "snow" ? "snow" : "sun")
+                    .resizable()
+                    .frame(width: 150, height: 150)
             }
-        )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding()
+            .background(
+                Group {
+                    if #available(iOS 17.0, *) {
+                        Color.clear.containerBackground(for: .widget) {
+//                            Color.clear  // ✅ iOS 17용 배경 처리
+                            returnColor(weather: entry.weatherType.capitalized)
+                            
+                        }
+                    } else {
+//                        Color.white  // ✅ iOS 16 이하 배경 처리
+                        returnColor(weather: entry.weatherType.capitalized)
+                    }
+                }
+            )
+        
     }
 }
 
@@ -76,8 +82,46 @@ struct umbrellaIssueWidget: Widget {
         StaticConfiguration(kind: kind, provider: WeatherProvider()) { entry in
             WeatherWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("날씨 위젯")
-        .description("현재 날씨를 표시합니다.")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .configurationDisplayName("우산이슈? 위젯")
+        .description("지금부터 8시간후까지의 날씨를 표시합니다.")
+        .supportedFamilies([.systemSmall])
     }
+}
+
+
+struct WeatherWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            WeatherWidgetEntryView(entry: WeatherEntry(date: Date(), weatherType: "rain"))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+          
+        }
+    }
+}
+
+
+extension Color {
+    init(hexString: String, opacity: Double = 1.0) {
+        let hex: Int = Int(hexString, radix: 16)!
+        
+        let red = Double((hex >> 16) & 0xff) / 255
+        let green = Double((hex >> 8) & 0xff) / 255
+        let blue = Double((hex >> 0) & 0xff) / 255
+
+        self.init(.sRGB, red: red, green: green, blue: blue, opacity: opacity)
+    }
+}
+
+
+func returnColor(weather : String) -> LinearGradient {
+    if weather == "rain" {
+        return LinearGradient(gradient: Gradient(colors: [Color(hexString: "7793EF"), Color(hexString: "D7D7D7")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+    } else if weather == "cloud" || weather == "snow" {
+        return LinearGradient(gradient: Gradient(colors: [Color(hexString: "FFFFFF"), Color(hexString: "446389")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+    } else {
+        return LinearGradient(gradient: Gradient(colors: [Color(hexString: "CCCA8F"), Color(hexString: "B20707")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+    }
+    
+    
+    
 }
