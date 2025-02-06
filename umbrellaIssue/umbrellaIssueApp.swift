@@ -1,6 +1,5 @@
 import SwiftUI
 import UIKit
-import BackgroundTasks
 import SharedWeatherKit
 
 @main

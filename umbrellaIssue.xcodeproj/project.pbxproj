@@ -717,7 +717,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = umbrellaIssueWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = M3KH86595Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = umbrellaIssueWidget/Info.plist;
@@ -752,7 +752,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = umbrellaIssueWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = M3KH86595Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = umbrellaIssueWidget/Info.plist;
@@ -909,7 +909,7 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_ENTITLEMENTS = umbrellaIssue/umbrellaIssue.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"umbrellaIssue/Preview Content\"";
 				DEVELOPMENT_TEAM = M3KH86595Z;
 				ENABLE_PREVIEWS = YES;
@@ -919,7 +919,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 위치 항상 수락 및 앱사용중 권한 수락 요청";
 				INFOPLIST_KEY_NSLocationUsageDescription = "사용자 위치 권한 수락";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱 사용중 권한 수락";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자 위치의 날씨를 알려주기 위한 권한 수락 요청";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -952,7 +952,7 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_ENTITLEMENTS = umbrellaIssue/umbrellaIssue.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"umbrellaIssue/Preview Content\"";
 				DEVELOPMENT_TEAM = M3KH86595Z;
 				ENABLE_PREVIEWS = YES;
@@ -962,7 +962,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 위치 항상 수락 및 앱사용중 권한 수락 요청";
 				INFOPLIST_KEY_NSLocationUsageDescription = "사용자 위치 권한 수락";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "앱 사용중 권한 수락";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자 위치의 날씨를 알려주기 위한 권한 수락 요청";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -47,29 +47,27 @@ struct WeatherWidgetEntryView: View {
     var entry: WeatherProvider.Entry
 
     var body: some View {
-      
-            VStack {
-                Image(entry.weatherType.capitalized == "rain" ? "umbrella" : entry.weatherType.capitalized == "cloud" ? "cloud" : entry.weatherType.capitalized == "snow" ? "snow" : "sun")
-                    .resizable()
-                    .frame(width: 150, height: 150)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding()
-            .background(
-                Group {
-                    if #available(iOS 17.0, *) {
-                        Color.clear.containerBackground(for: .widget) {
+        VStack {
+            Image(entry.weatherType.capitalized == "rain" ? "umbrella" : entry.weatherType.capitalized == "cloud" ? "cloud" : entry.weatherType.capitalized == "snow" ? "snow" : "sun")
+                .resizable()
+                .frame(width: 150, height: 150)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
+        .background(
+            Group {
+                if #available(iOS 17.0, *) {
+                    Color.clear.containerBackground(for: .widget) {
 //                            Color.clear  // ✅ iOS 17용 배경 처리
-                            returnColor(weather: entry.weatherType.capitalized)
-                            
-                        }
-                    } else {
-//                        Color.white  // ✅ iOS 16 이하 배경 처리
                         returnColor(weather: entry.weatherType.capitalized)
+                        
                     }
+                } else {
+//                        Color.white  // ✅ iOS 16 이하 배경 처리
+                    returnColor(weather: entry.weatherType.capitalized)
                 }
-            )
-        
+            }
+        )
     }
 }
 

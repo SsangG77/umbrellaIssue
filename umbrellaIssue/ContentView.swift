@@ -76,7 +76,10 @@ struct ContentView: View {
         .onChange(of: locationManager.location) { newLocation in
             guard let location = newLocation else { return }
             Task {
-                currentWeather = await weatherManager.getCurrentWeather(location: location)
+                let newCurrentWeather = await weatherManager.getCurrentWeather(location: location)
+                withAnimation {
+                    currentWeather = newCurrentWeather
+                }
             }
         }
     }

@@ -25,15 +25,13 @@ struct TodayWeatherView: View {
             HStack {
                 ScrollView(.horizontal, showsIndicators: true) {
                     HStack {
-                        
-                        
                         if hourWeathers.isEmpty {
                             VStack {
                                 Text("날씨 정보 불러오는 중...")
                                     .bold()
                                     
                             }
-                            .frame(height: 170)
+                            .frame(width: UIScreen.main.bounds.width * 0.9, height: 170)
                         } else {
                             Rectangle()
                                 .frame(width: 1, height: 170)
@@ -85,29 +83,22 @@ struct TodayWeatherView: View {
                                   currentWeather.isDaylight ? "2E435C" : "98BCE8"
                            :
                             currentWeather.isDaylight ? "5D0000" : "BD7070"
-                          ),
-                                
-                                
-                                lineWidth: 3)
+                          ),lineWidth: 3)
                 )
             .padding()
             .frame(height: 270)
             .onAppear {
-                        locationManager.requestLocation()
+                locationManager.requestLocation()
+            }
+            .onChange(of: locationManager.location) { newLocation in
+                guard let location = newLocation else { return }
+                Task {
+                    let newHourWeathers = await weatherManager.getTodayWeather(location: location)
+                    withAnimation {
+                        hourWeathers = newHourWeathers
                     }
-                    .onChange(of: locationManager.location) { newLocation in
-                        guard let location = newLocation else { return }
-                        Task {
-                            hourWeathers = await weatherManager.getTodayWeather(location: location)
-                        }
-                    }
-//            .onAppear {
-//                Task {
-//                    if let hour = await weatherManager.getTodayWeather() {
-//                        hourWeathers = hour
-//                    }
-//                }
-//            }
+                }
+            }
     }
 }
 

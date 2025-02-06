@@ -93,25 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("❌ 날씨 정보 가져오기 실패")
         }
         
-        
-//        if let weather = await weatherManager.getCurrentWeather(location: location) {
-//            print("🌦️ 현재 날씨 타입: \(weather.weatherType.rawValue)")
-//            
-//            guard let defaults = UserDefaults(suiteName: "group.com.sangjin.umbrellaWidget") else {
-//                       print("❌ App Group 설정 오류")
-//                       return
-//                }
-//            defaults.set(weather.weatherType.rawValue, forKey: "CurrentWeatherType")
-//            defaults.synchronize()  // 데이터 즉시 저장
-//            
-//            if let savedData = defaults.string(forKey: "CurrentWeatherType") {
-//                        print("📦 저장된 데이터(앱): \(savedData)")
-//            } else {
-//                print("❌ 데이터 없음 (앱)")
-//            }
-//            
-//        } else {
-//            print("❌ 날씨 정보 가져오기 실패")
-//        }
+ 
     }
 }

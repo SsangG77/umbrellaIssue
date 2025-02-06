@@ -92,17 +92,7 @@ struct currentWeatherView: View {
                 .frame(width: geo.size.width)
                 .background(Color(hexString: "D9D9D9", opacity: 0.2))
                 .cornerRadius(20)
-                
-                
-
-//            } else {
-//                VStack(alignment: .center) {
-//                    Text("날씨 정보 불러오는 중...")
-//                        .bold()
-//                }
-//                .frame(width: geo.size.width, height: geo.size.height)
-//            }
-            
+         
             
         }
         .frame(height: 170)

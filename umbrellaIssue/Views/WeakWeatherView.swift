@@ -20,10 +20,8 @@ struct WeakWeatherView: View {
     
     var body: some View {
         GeometryReader { geo in
-            VStack {
-//                ScrollView {
-                VStack(spacing: 10) {
-                        
+            VStack(spacing: 10) {
+//                VStack(spacing: 10) {
                         //for문
                     if weekWeathers.isEmpty {
                         VStack {
@@ -31,7 +29,7 @@ struct WeakWeatherView: View {
                                 .bold()
                                 
                         }
-                        .frame(height: 170)
+                        .frame(width: geo.size.width * 0.9, height: 170)
                     } else {
                         
                         ForEach($weekWeathers) { w in
@@ -53,17 +51,11 @@ struct WeakWeatherView: View {
                                 )
                         }
                         
-                        
                     }
-                    
-                       
-                       
-                    }//vstack
-                    .padding()
-//                }scrollview
+//                    }//vstack
+//                    .padding()
             }
-            .padding(.vertical)
-            
+            .padding()
             .background(Color(hexString: "D9D9D9", opacity: 0.2))
             .cornerRadius(20)
             .overlay(
@@ -80,21 +72,18 @@ struct WeakWeatherView: View {
                           ), lineWidth: 3)
                 )
             .onAppear {
-                        locationManager.requestLocation()
+                locationManager.requestLocation()
+            }
+            .onChange(of: locationManager.location) { newLocation in
+                guard let location = newLocation else { return }
+                Task {
+                   let newWeekWeathers = await weatherManager.getWeekWeather(location: location)
+                    
+                    withAnimation {
+                        weekWeathers = newWeekWeathers
                     }
-                    .onChange(of: locationManager.location) { newLocation in
-                        guard let location = newLocation else { return }
-                        Task {
-                            weekWeathers = await weatherManager.getWeekWeather(location: location)
-                        }
-                    }
-//            .onAppear {
-//                Task {
-//                    if let week = await weatherManager.getWeekWeather() {
-//                        weekWeathers = week
-//                    }
-//                }
-//            }
+                }
+            }
         }
         .padding(.horizontal)
         .frame(height: 100 * CGFloat(weekWeathers.count) + 40)

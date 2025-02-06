@@ -87,12 +87,6 @@ public class LocationManager: NSObject, ObservableObject, CLLocationManagerDeleg
     
     
 
-//    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        authorizationStatus = status
-//        if status == .authorizedWhenInUse || status == .authorizedAlways {
-//            manager.requestLocation()
-//        }
-//    }
 
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
             authorizationStatus = status
@@ -105,9 +99,13 @@ public class LocationManager: NSObject, ObservableObject, CLLocationManagerDeleg
         }
     
     
+//    public func requestLocation() {
+//        locationManager.requestLocation()
+//    }
     public func requestLocation() {
-        locationManager.requestLocation()
+        locationManager.startMonitoringSignificantLocationChanges() // 🔥 5km 이동 시만 업데이트
     }
+
     
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
