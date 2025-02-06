@@ -78,11 +78,12 @@ public class LocationManager: NSObject, ObservableObject, CLLocationManagerDeleg
     @Published public var locality: String = "위치 불러오는 중..."  // 🆕 지역명 추가
 
     public override init() {
-        super.init()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-    }
+            super.init()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+            locationManager.distanceFilter = 5000 // 5km 이동 시 업데이트
+            locationManager.requestWhenInUseAuthorization()
+        }
     
     
     
