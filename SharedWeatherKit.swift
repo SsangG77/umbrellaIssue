@@ -96,6 +96,7 @@ public class LocationManager: NSObject, ObservableObject, CLLocationManagerDeleg
                 defaults?.set(true, forKey: "LocationPermissionGranted") // 위치 권한이 할당되었음을 저장
             } else {
                 defaults?.set(false, forKey: "LocationPermissionGranted") // 위치 권한이 할당되지 않았음을 저장
+                print("aa")
             }
         }
     
